@@ -23,6 +23,13 @@ const routes = [
      component: () => import('@/views/aluno/alunoN.vue')
    },
 
+//Rotas Professor
+{
+  path: '/jpcadastro/professor/cadastro',
+  name: 'ProfessorCadastro',
+  component: () => import('@/views/professor/professorN.vue')
+},
+
 
 
 ]

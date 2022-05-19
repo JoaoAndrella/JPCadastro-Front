@@ -1,20 +1,19 @@
 <template>
-<body>
-    <div class="form">
+<div class="form">
 <form>
     <div class="input-container">
         <span>CPF*</span>
-        <input type="text" required v-model="aluno.cpf" />
+        <input type="text" required v-model="professor.cpf" />
     </div>
 
     <div class="input-container">
         <span>Nome*</span>
-        <input type="text" name="nome" required v-model="aluno.nome" />
+        <input type="text" name="nome" required v-model="professor.nome" />
     </div>
 
     <div class="input-container">
         <span>Telefone*</span>
-        <input type="text" name="telefone" required v-model="aluno.telefone" />
+        <input type="text" name="telefone" required v-model="professor.telefone" />
     </div> 
 
     <p class="warning">*Campos obrigatórios</p>
@@ -23,14 +22,13 @@
         <button type="button" @click="adicionar">Enviar</button>
     </div>
 </form>
-    </div>
-</body>
+</div>
 </template>
 
 <script>
 
 import NotificacaoService from "@/common/services/utils/notificacao.service"
-import AlunoService from "@/common/services/aluno/aluno.service"
+import ProfessorService from "@/common/services/professor/professor.service" 
 
 export default {
     components: {
@@ -38,7 +36,7 @@ export default {
     },
     data() {
         return {
-            aluno: {
+            professor: {
                 cpf: null,
                 nome: null,
                 telefone: null
@@ -47,7 +45,7 @@ export default {
     },
     methods: {
         adicionar() {
-            AlunoService.adicionar(this.aluno)
+            ProfessorService.adicionar(this.professor)
             .then(result => {
                 NotificacaoService.exibirNotificacaoSucessoApi(result)
                 this.inicializarDados();
@@ -56,10 +54,10 @@ export default {
                 if (err.response.status == 400) {
                     NotificacaoService.exibirNotificacaoErroApi(err);
                 }
-            }); 
+            });
         },
         inicializarDados() {
-            this.aluno = {
+            this.professor = {
                 cpf: "",
                 nome: "",
                 telefone: ""
@@ -67,27 +65,23 @@ export default {
         }
     }
 }
-
 </script>
 
 <style scoped>
-
 .form{
 	padding:10px;
 	width: 400px;
 	height: calc(100% + 30px);
+	float: center;
 	top:-15px;
-    float: center;
-	position: center;
-	border:8px solid rgba(115, 139, 217, 0.5);
-	background-color: #223161;
+	border:8px solid #999999;
+	background-color: white;
 }
 .form h2{
 	font-weight: normal;
 	color: #999999;
 	font-size: 21px;
 }
-
 .input-container{
 	margin-top:20px;
 }
@@ -95,21 +89,17 @@ export default {
 .input-container span{
 	display: inline-block;
 	width: 100%;
-	color: white;
-	font-size: 20px;
+	color: #BBBBBB;
+	font-size: 17px;
 }
-
 .input-container input[type=text]{
 	margin-top:8px;
 	width: 344px;
 	height: 55px;
-	border:2px solid #60636b;
-    font-size:25px;
-    background-color: #f0f0f5 ;
+	border:1px solid #ccc;
 }
-
 .form input[type=submit]{
-	color: #60636b;
+	color: white;
 	font-size: 25px;
 	width: 280px;
 	height: 56px;
@@ -122,27 +112,7 @@ export default {
 	border-bottom: 5px solid #4A5097;
 }
 
-.input-submit-container button[type=button]{
-	text-align: center;
-    margin-top:4px;
-	width: 344px;
-	height: 55px;
-    font-size:30px;
-	cursor: pointer;
-	display: inline-block;
-    color: white;
-    background-color: #6b768f;
+.form input[type=submit]:hover{
+	background-color: #323665;
 }
-
-.input-submit-container button[type=button]:hover{
-	background-color: #849edb;
-	border-bottom: 5px solid #4A5097;
-
-}
-
-.warning{
-    color: white;
-    font-size: 20px;
-}
-
 </style>
