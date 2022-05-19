@@ -5,7 +5,6 @@ const AlunoService = {
         return ApiService.get('Aluno/listar');
     },
     adicionar(aluno) {
-      alert("servico");
       return ApiService.post('Aluno/adicionar', aluno);  
     }
 }

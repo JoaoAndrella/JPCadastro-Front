@@ -2,7 +2,7 @@ import axios from "axios";
 
 const ApiService = {
     init() {
-        this.setBaseURL('https://localhost:44343/api/');
+        this.setBaseURL('https://localhost:7260/api/');
     },
     setBaseURL(url) {
         axios.defaults.baseURL = url;

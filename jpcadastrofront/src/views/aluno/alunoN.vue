@@ -6,20 +6,21 @@
         <input type="text" required v-model="aluno.cpf" />
     </div>
 
-    <!-- <div class="input-container">
+    <div class="input-container">
         <span>Nome*</span>
-        <input type="text" name="nome" required v-model="nomealuno" />
+        <input type="text" name="nome" required v-model="aluno.nome" />
     </div>
 
     <div class="input-container">
         <span>Telefone*</span>
-        <input type="text" name="telefone" required v-model="telefonealuno" />
-    </div> -->
+        <input type="text" name="telefone" required v-model="aluno.telefone" />
+    </div> 
 
     <p class="warning">*Campos obrigatórios</p>
 
     <div class="input-submit-container">
-        <button @click="adicionar">Enviar</button>
+        <button type="button" @click="adicionar">Enviar</button>
+        debug
     </div>
 </form>
 </div>
@@ -27,6 +28,7 @@
 
 <script>
 
+import NotificacaoService from "@/common/services/utils/notificacao.service"
 import AlunoService from "@/common/services/aluno/aluno.service"
 
 export default {
@@ -37,16 +39,22 @@ export default {
         return {
             aluno: {
                 cpf: null,
+                nome: null,
+                telefone: null
             }
         }
     },
     methods: {
         adicionar() {
-            aluno.cpf = this.cpfaluno
-            aluno.nome = this.nomealuno
-            aluno.telefone = this.telefonealuno
-            console.log("********** ALUNO=", this.aluno) 
-            AlunoService.adicionar(this.aluno);
+            AlunoService.adicionar(this.aluno)
+            .then(result => {
+                NotificacaoService.exibirNotificacaoSucessoApi(result)
+            })
+            .catch(err => {
+                if (err.response.status == 400) {
+                    NotificacaoService.exibirNotificacaoErroApi(err);
+                }
+            }); 
         }
     }
 }
