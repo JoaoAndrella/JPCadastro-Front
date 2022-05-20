@@ -6,6 +6,12 @@ const AlunoService = {
     },
     adicionar(aluno) {
       return ApiService.post('Aluno/adicionar', aluno);  
+    },
+    atualizar(aluno){
+      return ApiService.put('Aluno/atualizar', aluno);
+    },
+    obter(id) {
+      return ApiService.get(`Aluno/obter/${id}`);   
     }
 }
 
