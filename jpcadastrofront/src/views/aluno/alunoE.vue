@@ -45,9 +45,23 @@ export default {
             }
         }
     },
+    mounted() {
+        this.obterAlunoPorId();
+    },
+
     methods: {
-        adicionar() {
-            AlunoService.adicionar(this.aluno)
+        obterAlunoPorId() {
+            AlunoService.obter(this.$route.params.id)
+            .then(result => {
+                this.aluno = result.data.dados;
+            })
+            .catch(err => {
+                console.log(err.response);
+            })
+        },
+
+        atualizar() {
+            AlunoService.atualizar(this.aluno)
             .then(result => {
                 NotificacaoService.exibirNotificacaoSucessoApi(result)
                 this.inicializarDados();
