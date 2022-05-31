@@ -2,16 +2,8 @@
 <body>
 <div class="divPai">
     <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">Cpf:</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cpf" required v-model="aluno.cpf">
-    </div>
-    <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Nome:</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Aluno" required v-model="aluno.nome">
-    </div>
-    <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">Telefone:</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Telefone" required v-model="aluno.telefone">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Curso" required v-model="curso.nome">
     </div>
         <p class="warning">*Campos obrigatórios</p>
     <div class="d-grid gap-2 col-6 mx-auto">
@@ -24,7 +16,10 @@
 <script>
 
 import NotificacaoService from "@/common/services/utils/notificacao.service"
-import AlunoService from "@/common/services/aluno/aluno.service"
+import CursoService from "@/common/services/curso/curso.service"
+import EnumatorService from "@/common/services/enumerators/enumerator.service"
+
+
 
 export default {
     components: {
@@ -32,37 +27,52 @@ export default {
     },
     data() {
         return {
-            aluno: {
-                cpf: null,
+            curso: {
                 nome: null,
-                telefone: null
-            }
+                perido: null,
+                professorId: null,
+                professorNome: null,
+            },
+            colecaoPeriodoCurso: []
         }
     },
+
+    mounted(){
+        this.listarPeriodo();
+    },
+
+
     methods: {
         adicionar() {
-            AlunoService.adicionar(this.aluno)
+            CursoService.adicionar(this.curso)
             .then(result => {
                 NotificacaoService.exibirNotificacaoSucessoApi(result)
-                this.inicializarDados();
-                this.$router.push({name: "AlunoListagem"})
             })
             .catch(err => {
                 if (err.response.status == 400) {
                     NotificacaoService.exibirNotificacaoErroApi(err);
                 }
-            }); 
+            });
         },
         inicializarDados() {
-            this.aluno = {
-                cpf: "",
+            this.curso = {
                 nome: "",
-                telefone: ""
+                periodo: "",
+                professorNome: "",
             }
+        },
+
+        listarPeriodo(){
+            EnumatorService.listarPeriodoCurso()
+            .then(result => {
+                this.colecaoPeriodoCurso = result.data.dados
+            })
+            .catch( err => {
+                console.log(err.response)
+            })
         }
     }
 }
-
 </script>
 
 <style scoped>
@@ -81,5 +91,4 @@ export default {
 .warning{
     text-align: center;
 }
-
 </style>

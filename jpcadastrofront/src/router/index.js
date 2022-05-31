@@ -35,8 +35,6 @@ const routes = [
     component: () => import('@/views/aluno/alunoE.vue')
   },
 
-
-
   //Rotas Professor
   {
     path: '/jpcadastro/professor/cadastro',
@@ -44,7 +42,24 @@ const routes = [
     component: () => import('@/views/professor/professorN.vue')
   },
 
+  {
+    path: '/jpcadastro/professor/listagem',
+    name: 'ProfessorListagem',
+    component: () => import('@/views/professor/professorL.vue')
+  },
 
+  {
+    path: '/jpcadastro/professor/editar/:id',
+    name: 'ProfessorEditar',
+    component: () => import('@/views/professor/professorE.vue')
+  },
+
+  //Rotas Curso
+  {
+    path: '/jpcadastro/curso/cadastro',
+    name: 'CursoCadastro',
+    component: () => import('@/views/curso/cursoN.vue')
+  },
 
 ]
 

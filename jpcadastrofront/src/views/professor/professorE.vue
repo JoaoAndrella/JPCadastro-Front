@@ -3,19 +3,19 @@
 <div class="divPai">
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Cpf:</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cpf" required v-model="aluno.cpf">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cpf" required v-model="professor.cpf">
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Nome:</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Aluno" required v-model="aluno.nome">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Professor" required v-model="professor.nome">
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Telefone:</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Telefone" required v-model="aluno.telefone">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Telefone" required v-model="professor.telefone">
     </div>
         <p class="warning">*Campos obrigatórios</p>
     <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary" type="button" @click="adicionar">Cadastrar</button>
+        <button class="btn btn-primary" type="button" @click="atualizar">Editar</button>
     </div>
 </div>    
 </body>
@@ -24,7 +24,7 @@
 <script>
 
 import NotificacaoService from "@/common/services/utils/notificacao.service"
-import AlunoService from "@/common/services/aluno/aluno.service"
+import ProfessorService from "@/common/services/professor/professor.service"
 
 export default {
     components: {
@@ -32,20 +32,38 @@ export default {
     },
     data() {
         return {
-            aluno: {
+            professor: {
                 cpf: null,
                 nome: null,
                 telefone: null
             }
         }
     },
+    mounted() {
+        this.obterProfessorPorId();
+    },
+
     methods: {
-        adicionar() {
-            AlunoService.adicionar(this.aluno)
+        obterProfessorPorId() {
+            ProfessorService.obter(this.$route.params.id)
+            .then(result => {
+                this.professor = result.data.dados;
+            })
+            .catch(err => {
+                console.log(err.response);
+            })
+        },
+
+        atualizar() {
+            ProfessorService.atualizar(this.professor)
             .then(result => {
                 NotificacaoService.exibirNotificacaoSucessoApi(result)
-                this.inicializarDados();
-                this.$router.push({name: "AlunoListagem"})
+                .then(resultNotificacao =>{
+                    this.$router.push({name: "ProfessorListagem"})
+                })
+                 .catch(err => {
+                    NotificacaoService.exibirNotificacaoErroApi(err);
+                })
             })
             .catch(err => {
                 if (err.response.status == 400) {
@@ -53,13 +71,6 @@ export default {
                 }
             }); 
         },
-        inicializarDados() {
-            this.aluno = {
-                cpf: "",
-                nome: "",
-                telefone: ""
-            }
-        }
     }
 }
 
@@ -81,5 +92,4 @@ export default {
 .warning{
     text-align: center;
 }
-
 </style>

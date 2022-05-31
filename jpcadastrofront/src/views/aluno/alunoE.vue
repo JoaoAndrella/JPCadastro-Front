@@ -1,29 +1,23 @@
 <template>
 <body>
-    <div class="form">
-<form>
-    <div class="input-container">
-        <span>CPF*</span>
-        <input type="text" required v-model="aluno.cpf" />
+<div class="divPai">
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">Cpf:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Cpf" required v-model="aluno.cpf">
     </div>
-
-    <div class="input-container">
-        <span>Nome*</span>
-        <input type="text" name="nome" required v-model="aluno.nome" />
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">Nome:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Aluno" required v-model="aluno.nome">
     </div>
-
-    <div class="input-container">
-        <span>Telefone*</span>
-        <input type="text" name="telefone" required v-model="aluno.telefone" />
-    </div> 
-
-    <p class="warning">*Campos obrigatórios</p>
-
-    <div class="input-submit-container">
-        <button type="button" @click="adicionar">Enviar</button>
+    <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">Telefone:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Telefone" required v-model="aluno.telefone">
     </div>
-</form>
+        <p class="warning">*Campos obrigatórios</p>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-primary" type="button" @click="atualizar">Editar</button>
     </div>
+</div>    
 </body>
 </template>
 
@@ -64,8 +58,12 @@ export default {
             AlunoService.atualizar(this.aluno)
             .then(result => {
                 NotificacaoService.exibirNotificacaoSucessoApi(result)
-                this.inicializarDados();
-                this.$router.push({name: "AlunoListagem"})
+                .then(resultNotificacao =>{
+                    this.$router.push({name: "AlunoListagem"})
+                })
+                 .catch(err => {
+                    NotificacaoService.exibirNotificacaoErroApi(err);
+                })
             })
             .catch(err => {
                 if (err.response.status == 400) {
@@ -73,91 +71,25 @@ export default {
                 }
             }); 
         },
-        inicializarDados() {
-            this.aluno = {
-                cpf: "",
-                nome: "",
-                telefone: ""
-            }
-        }
     }
 }
 
 </script>
 
 <style scoped>
+.mb-3{
+    width: 400px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
 
-.form{
-	padding:10px;
-	width: 400px;
-	height: calc(100% + 30px);
-	top:-15px;
-    float: center;
-	position: center;
-	border:8px solid rgba(115, 139, 217, 0.5);
-	background-color: #223161;
-}
-.form h2{
-	font-weight: normal;
-	color: #999999;
-	font-size: 21px;
 }
 
-.input-container{
-	margin-top:20px;
-}
-
-.input-container span{
-	display: inline-block;
-	width: 100%;
-	color: white;
-	font-size: 20px;
-}
-
-.input-container input[type=text]{
-	margin-top:8px;
-	width: 344px;
-	height: 55px;
-	border:2px solid #60636b;
-    font-size:25px;
-    background-color: #f0f0f5 ;
-}
-
-.form input[type=submit]{
-	color: #60636b;
-	font-size: 25px;
-	width: 280px;
-	height: 56px;
-	display: inline-block;
-	background-color: #363A6D;
-	border-top:0;
-	border-right: 0;
-	border-left: 0;
-	cursor: pointer;
-	border-bottom: 5px solid #4A5097;
-}
-
-.input-submit-container button[type=button]{
-	text-align: center;
-    margin-top:4px;
-	width: 344px;
-	height: 55px;
-    font-size:30px;
-	cursor: pointer;
-	display: inline-block;
-    color: white;
-    background-color: #6b768f;
-}
-
-.input-submit-container button[type=button]:hover{
-	background-color: #849edb;
-	border-bottom: 5px solid #4A5097;
-
+.d-grid{
+    width:110px;
 }
 
 .warning{
-    color: white;
-    font-size: 20px;
+    text-align: center;
 }
-
 </style>

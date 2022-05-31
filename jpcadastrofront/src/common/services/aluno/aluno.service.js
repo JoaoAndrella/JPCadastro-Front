@@ -12,7 +12,10 @@ const AlunoService = {
     },
     obter(id) {
       return ApiService.get(`Aluno/obter/${id}`);   
-    }
+    },
+    remover(id){
+      return ApiService.delete(`Aluno/remover/${id}`);
+    },
 }
 
 export default AlunoService
