@@ -61,6 +61,13 @@ const routes = [
     component: () => import('@/views/curso/cursoN.vue')
   },
 
+  {
+    path: '/jpcadastro/curso/listagem',
+    name: 'CursoListagem',
+    component: () => import('@/views/curso/cursoL.vue')
+  },
+
+
 ]
 
 const router = createRouter({

@@ -30,6 +30,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="/jpcadastro/professor/cadastro#/jpcadastro/curso/cadastro">Adicionar</a>
+          <a class="dropdown-item" href="/jpcadastro/professor/cadastro#/jpcadastro/curso/listagem">Listar/Editar/Remover</a>
         </div>
       </li>
     </ul>
