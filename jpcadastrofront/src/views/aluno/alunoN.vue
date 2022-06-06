@@ -7,7 +7,7 @@
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Nome:</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Aluno" required v-model="aluno.nome">
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nome do Aluno(a)" required v-model="aluno.nome">
     </div>
     <div class="mb-3">
         <label for="formGroupExampleInput" class="form-label">Telefone:</label>

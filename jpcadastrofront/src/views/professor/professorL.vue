@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th>Cpf</th>
-                    <th>Nome</th>
+                    <th>Nome do Professor(a)</th>
                     <th>Telefone</th>
                     <th>Opçoes</th>
                 </tr>

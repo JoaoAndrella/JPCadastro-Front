@@ -5,7 +5,7 @@ const NotificacaoService = {
         return Swal.fire({
            icon: 'success',
            title: 'Sucesso',
-           html: "Cpf: " + sucessoApi.data.dados.cpf + " - " + sucessoApi.data.dados.mensagem                  
+           html: sucessoApi.data.dados.mensagem                  
         });
     },
     exibirNotificacaoErroApi(erroApi) {

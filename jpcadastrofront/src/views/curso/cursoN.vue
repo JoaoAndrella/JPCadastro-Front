@@ -54,6 +54,7 @@ export default {
             CursoService.adicionar(this.curso)
             .then(result => {
                 NotificacaoService.exibirNotificacaoSucessoApi(result)
+             this.$router.push({name: "CursoListagem"})    
             })
             .catch(err => {
                 if (err.response.status == 400) {

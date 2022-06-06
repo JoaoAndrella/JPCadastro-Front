@@ -11,8 +11,8 @@
           Aluno
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/jpcadastro/professor/cadastro#/jpcadastro/aluno/cadastro">Adicionar</a>
-          <a class="dropdown-item" href="/jpcadastro/professor/cadastro#/jpcadastro/aluno/listagem">Listar/Editar/Remover</a>
+          <a class="dropdown-item" href="/jpcadastro/aluno/cadastro#/jpcadastro/aluno/cadastro">Adicionar</a>
+          <a class="dropdown-item" href="/jpcadastro/aluno/cadastro#/jpcadastro/aluno/listagem">Listar/Editar/Remover</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -29,8 +29,17 @@
           Curso
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/jpcadastro/professor/cadastro#/jpcadastro/curso/cadastro">Adicionar</a>
-          <a class="dropdown-item" href="/jpcadastro/professor/cadastro#/jpcadastro/curso/listagem">Listar/Editar/Remover</a>
+          <a class="dropdown-item" href="/jpcadastro/curso/cadastro#/jpcadastro/curso/cadastro">Adicionar</a>
+          <a class="dropdown-item" href="/jpcadastro/curso/cadastro#/jpcadastro/curso/listagem">Listar/Editar/Remover</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
+          Matricula
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/jpcadastro/matricula/cadastro#/jpcadastro/matricula/cadastro">Adicionar</a>
+          <a class="dropdown-item" href="/jpcadastro/matricula/cadastro#/jpcadastro/matricula/listagem">Listar/Editar/Remover</a>
         </div>
       </li>
     </ul>

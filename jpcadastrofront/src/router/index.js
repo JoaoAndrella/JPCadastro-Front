@@ -67,6 +67,28 @@ const routes = [
     component: () => import('@/views/curso/cursoL.vue')
   },
 
+  {
+    path: '/jpcadastro/curso/editar/:id',
+    name: 'CursoEditar',
+    component: () => import('@/views/curso/cursoE.vue')
+  },
+
+  //Rotas Matricula
+  {
+    path: '/jpcadastro/matricula/cadastro',
+    name: 'MatriculaCadastro',
+    component: () => import('@/views/matricula/matriculaN.vue')
+  },
+  {
+    path: '/jpcadastro/matricula/listagem',
+    name: 'MatriculaListagem',
+    component: () => import('@/views/matricula/matriculaL.vue')
+  },
+  {
+    path: '/jpcadastro/matricula/editar/:id',
+    name: 'MatriculaEditar',
+    component: () => import('@/views/matricula/matriculaE.vue')
+  },
 
 ]
 

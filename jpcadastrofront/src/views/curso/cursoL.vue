@@ -6,25 +6,28 @@
                     <th>Nome</th>
                     <th>Periodo</th>
                     <th>Professor</th>
-                    <th>Opcoes</th>
+                    <th class="op">Opcoes</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="curso in colecaoCurso" :key="curso.id">
                     <td>{{curso.nome}}</td>
-                    <td>{{curso.colecaoPeriodo}}</td>
+                    <td>{{curso.periodo}}</td>
                     <td>{{curso.professorNome}}</td>
+                    <td><button type="button" @click="editarCurso(curso.id)"><i class="fa-solid fa-pen-to-square">Editar</i></button>
+                        <button type="button" @click="removerCurso(curso.id)"><i class="fa-solid fa-trash-can">Remover</i></button>
+                    </td>
                 </tr>
             </tbody>
         </table>
-    </div>
+</div>
 </template>
 
 <script>
 
 import CursoService from '@/common/services/curso/curso.service'
 import EnumatorService from "@/common/services/enumerators/enumerator.service"
-
+import NotificacaoService from "@/common/services/utils/notificacao.service"
 
 export default {
     components: {
@@ -43,7 +46,6 @@ export default {
             colecaoPeriodo: [],
         }
     },
-
     mounted() {
         this.listarCurso();
         this.listarPeriodo();
@@ -53,20 +55,33 @@ export default {
             CursoService.listar()
             .then(result => {
                 this.colecaoCurso = result.data.dados;
-                console.log("******", result.data.dados)
             })
         },
         listarPeriodo(){
             EnumatorService.listarPeriodoCurso()
             .then(result => {
                 this.colecaoPeriodo = result.data
-                console.log("******", result.data)
             })
             .catch( err => {
                 console.log(err.response)
             })
         },
-     }
+        editarCurso(cursoId) {
+            this.$router.push({name: "CursoEditar", params: {id: cursoId}});
+        },
+        removerCurso(id){
+            CursoService.remover(id)
+            .then(result => {
+                NotificacaoService.exibirNotificacaoSucessoApi(result)
+                .then(resultNotificacao => {
+                    this.listarCurso()
+                })
+                .catch(err =>{
+                    NotificacaoService.exibirNotificacaoErroApi(err)
+                })
+            })
+        },
+    }
 }
 </script>
 
